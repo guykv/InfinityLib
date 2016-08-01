@@ -1,42 +1,45 @@
 package com.infinityraider.infinitylib.item;
 
+import com.infinityraider.infinitylib.utility.ModHelper;
 import net.minecraft.item.Item;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class ItemBase extends Item implements IItemWithModel {
-    private final String internalName;
-    private final boolean isModelVanilla;
-    protected final String[] varients;
+public abstract class ItemBase extends Item implements IInfinityItem {
 
-    public ItemBase(String name, boolean modelVanilla, String... varients) {
-        super();
-        this.internalName = name;
-        this.isModelVanilla = modelVanilla;
-        if (varients.length == 0) {
-            this.varients = new String[]{""};
-        } else {
-            this.varients = varients;
-        }
-    }
+	private final String internalName;
+	private final boolean isModelVanilla;
+	protected final String[] varients;
 
-    public boolean isEnabled() {
-        return true;
-    }
+	public ItemBase(String name, boolean modelVanilla, String... varients) {
+		super();
+		this.internalName = name;
+		this.isModelVanilla = modelVanilla;
+		this.varients = varients;
+	}
 
-    public boolean isVanillaModel() {
-        return isModelVanilla;
-    }
+	public boolean isEnabled() {
+		return true;
+	}
 
-    public String getInternalName() {
-        return internalName;
-    }
+	public boolean isVanillaModel() {
+		return isModelVanilla;
+	}
 
-    public List<String> getIgnoredNBT() {
-        return Collections.emptyList();
-    }
+	public String getInternalName() {
+		return internalName;
+	}
 
-    public abstract List<String> getOreTags();
+	public List<String> getIgnoredNBT() {
+		return Collections.emptyList();
+	}
+
+	public abstract List<String> getOreTags();
+
+	@Override
+	public void registerItemRenderer() {
+		ModHelper.registerItemModels(this, varients);
+	}
+	
 }

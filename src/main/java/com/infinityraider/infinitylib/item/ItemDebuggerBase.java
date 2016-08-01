@@ -26,8 +26,8 @@ import java.util.List;
 public abstract class ItemDebuggerBase extends ItemBase {
     private final List<DebugMode> DEBUG_MODES;
 
-    public ItemDebuggerBase(boolean isVanilla, String... varients) {
-        super("debugger", isVanilla, varients);
+    public ItemDebuggerBase(boolean isVanilla) {
+        super("debugger", isVanilla);
         this.DEBUG_MODES = new ArrayList<>();
         this.DEBUG_MODES.add(new DebugModeFeedback());
         this.DEBUG_MODES.addAll(getDebugModes());
